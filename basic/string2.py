@@ -17,8 +17,10 @@
 # Return the resulting string.
 def verbing(s):
   # +++your code here+++
-  return
+  if len(s) < 3:
+    return s
 
+  return s + "ly" if s[-3:] == "ing" else s + "ing"
 
 # E. not_bad
 # Given a string, find the first appearance of the
@@ -29,8 +31,13 @@ def verbing(s):
 # So 'This dinner is not that bad!' yields:
 # This dinner is good!
 def not_bad(s):
-  # +++your code here+++
-  return
+  l = s.index("not") if "not" in s else -1
+  r = s.index("bad") if "bad" in s else -1
+
+  if l < r:
+    return s[:l] + "good" + s[r+3:]
+  else:
+    return s
 
 
 # F. front_back
@@ -41,8 +48,27 @@ def not_bad(s):
 # Given 2 strings, a and b, return a string of the form
 #  a-front + b-front + a-back + b-back
 def front_back(a, b):
-  # +++your code here+++
-  return
+  a_front = ""
+  a_back = ""
+
+  if len(a) % 2 == 0:
+    a_front = a[:len(a)//2]
+    a_back = a[len(a)//2:]
+  else:
+    a_front = a[:len(a)//2 + 1]
+    a_back = a[len(a)//2 + 1: ]
+
+  b_front = ""
+  b_back = ""
+
+  if len(b) % 2 == 0:
+    b_front = b[:len(b) // 2]
+    b_back = b[len(b) // 2:]
+  else:
+    b_front = b[:len(b) // 2 + 1]
+    b_back = b[len(b) // 2 + 1:]
+
+  return a_front + b_front + a_back + b_back
 
 
 # Simple provided test() function used in main() to print
@@ -52,7 +78,7 @@ def test(got, expected):
     prefix = ' OK '
   else:
     prefix = '  X '
-  print '%s got: %s expected: %s' % (prefix, repr(got), repr(expected))
+  print('%s got: %s expected: %s' % (prefix, repr(got), repr(expected)))
 
 
 # main() calls the above functions with interesting inputs,
